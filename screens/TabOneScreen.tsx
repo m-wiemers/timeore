@@ -1,15 +1,26 @@
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import Card from '../components/Card';
+import Input from '../components/Input';
+import StyledText from '../components/StyledText';
+import { Colors } from '../constants/Colors';
 import { RootTabScreenProps } from '../types';
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function TabOneScreen({
+  navigation,
+}: RootTabScreenProps<'TabOne'>) {
+  const [name, setName] = useState<string>('');
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+      <StyledText type="headline">Headline</StyledText>
+      <StyledText>Einfach normaler ganz einfach normaler Text</StyledText>
+      <StyledText type="label">dein Name</StyledText>
+      <Card>
+        <StyledText>Hello dies ist mehr</StyledText>
+      </Card>
+      <Input label="Name" value={name} onChangeText={setName} />
+      <View style={styles.separator} />
     </View>
   );
 }
@@ -17,12 +28,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    backgroundColor: Colors.backgroundColor,
   },
   separator: {
     marginVertical: 30,
