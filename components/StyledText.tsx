@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { TextStyle, View } from 'react-native';
+import { TextStyle, View, ViewStyle } from 'react-native';
 import styled from 'styled-components/native';
 import { Colors } from '../constants/Colors';
 
@@ -7,6 +7,7 @@ type Props = {
   type?: 'headline' | 'label';
   children: ReactNode;
   style?: TextStyle;
+  viewStyle?: ViewStyle;
 };
 
 const Headline = styled.Text<Partial<Props>>`
@@ -16,9 +17,9 @@ const Headline = styled.Text<Partial<Props>>`
   font-weight: ${({ type }) => (type == 'headline' ? 'bold' : 'normal')};
 `;
 
-const StyledText = ({ type, style, children }: Props) => {
+const StyledText = ({ type, style, viewStyle, children }: Props) => {
   return (
-    <View>
+    <View style={viewStyle}>
       <Headline type={type} style={style && style}>
         {children}
       </Headline>
