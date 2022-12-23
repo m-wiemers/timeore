@@ -8,19 +8,35 @@ type Props = {
   children: ReactNode;
   style?: TextStyle;
   viewStyle?: ViewStyle;
+  bold?: boolean;
+  centered?: boolean;
 };
 
 const Headline = styled.Text<Partial<Props>>`
   color: ${Colors.textColor};
   font-size: ${({ type }) =>
     type == 'headline' ? '30px' : type == 'label' ? '12px' : '15px'};
-  font-weight: ${({ type }) => (type == 'headline' ? 'bold' : 'normal')};
+  font-weight: ${({ type, bold }) =>
+    type == 'headline' || bold !== undefined ? 'bold' : 'normal'};
+  text-align: ${({ centered }) => (centered !== undefined ? 'center' : 'left')};
 `;
 
-const StyledText = ({ type, style, viewStyle, children }: Props) => {
+const StyledText = ({
+  type,
+  style,
+  viewStyle,
+  bold,
+  centered,
+  children,
+}: Props) => {
   return (
     <View style={viewStyle}>
-      <Headline type={type} style={style && style}>
+      <Headline
+        centered={centered}
+        bold={bold}
+        type={type}
+        style={style && style}
+      >
         {children}
       </Headline>
     </View>

@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { TextInputProps, View, ViewStyle } from 'react-native';
+import {
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+  TextInputProps,
+  View,
+  ViewStyle,
+} from 'react-native';
 import styled from 'styled-components/native';
 import { Colors } from '../constants/Colors';
 import StyledText from './StyledText';
@@ -58,7 +64,7 @@ const Input = ({
 
   const handleBlur = () => {
     if (onBlur) {
-      onBlur(onBlur);
+      (e: NativeSyntheticEvent<TextInputFocusEventData>) => onBlur(e);
     }
     isActive(false);
   };

@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import styled from 'styled-components/native';
-import Input from '../components/Input';
-import StyledText from '../components/StyledText';
-import { Colors } from '../constants/Colors';
-import { RootTabScreenProps } from '../types';
+import Input from '../../components/Input';
+import StyledText from '../../components/StyledText';
+import TouchButton from '../../components/TouchButton';
+import { Colors } from '../../constants/Colors';
+import { RootTabScreenProps } from '../../types';
 
 type UserProps = {
   name: string;
@@ -19,9 +20,7 @@ const Wrapper = styled.View`
   justify-self: center;
 `;
 
-export default function TabOneScreen({
-  navigation,
-}: RootTabScreenProps<'TabOne'>) {
+export default function SignInScreen() {
   const [user, setUser] = useState<UserProps>({
     name: '',
     password: '',
@@ -39,8 +38,7 @@ export default function TabOneScreen({
   const [console, setConsole] = useState<string>('');
 
   const checkEmail = () => {
-    (user.email !== '' && !user.email.includes('@')) ||
-    !user.email.includes('.')
+    user.email !== '' || !user.email.includes('@') || !user.email.includes('.')
       ? setError({ ...error, emailError: 'Email-Adresse nicht valide' })
       : setError({ ...error, emailError: '' });
   };
@@ -48,10 +46,7 @@ export default function TabOneScreen({
   return (
     <View style={styles.container}>
       <Wrapper>
-        <StyledText
-          type="headline"
-          style={{ marginBottom: 20, textAlign: 'center' }}
-        >
+        <StyledText type="headline" centered style={{ marginBottom: 20 }}>
           Anmelden
         </StyledText>
         <StyledText>{console}</StyledText>
@@ -93,6 +88,7 @@ export default function TabOneScreen({
           error={error.seconPasswordError}
           required
         />
+        <TouchButton label="Anmelden" />
       </Wrapper>
     </View>
   );
